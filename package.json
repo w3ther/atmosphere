@@ -21,6 +21,8 @@
     "npm": ">=7.0.0",
     "node": ">=14.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "gun": "^0.2020.1237"
+  },
   "packageManager": "pnpm@7.0.0"
 }
