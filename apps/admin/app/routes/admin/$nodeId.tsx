@@ -5,43 +5,38 @@ import invariant from "tiny-invariant";
 import { deleteNote } from "~/models/note.server";
 import { requireUserId } from "~/session.server";
 import { gun } from "utils";
+import { WeatherData } from "database";
 
 type LoaderData = {
   weatherDataArray: Array<WeatherData>;
 };
-type WeatherData = {
-  temperature: number;
-  windSpeed: number;
-  // make this 24 hour format
-  updatedAt: any;
+
+export const loader: LoaderFunction = async ({ request, params }) => {
+  invariant(params.nodeId, "noteId not found");
+  const weatherDataArray = new Array<WeatherData>();
+
+  await gun
+    .get("weatherNodes")
+    .get(params.nodeId)
+    .map()
+    .on((data) => {
+      if (data) {
+        const weatherData = {} as WeatherData;
+        weatherData.temperature =
+          data.temperature === 0 || data.temperature ? data.temperature : null;
+        weatherData.windSpeed =
+          data.windSpeed === 0 || data.windSpeed ? data.windSpeed : null;
+        weatherData.updatedAt =
+          data.updatedAt === 0 || data.updatedAt ? data.updatedAt : null;
+        weatherDataArray.push(weatherData);
+      }
+    });
+  // sort weatherDataArray by updatedAt which is a millisecond timestamp
+  weatherDataArray.sort((a, b) => {
+    return b.updatedAt - a.updatedAt;
+  });
+  return json<LoaderData>({ weatherDataArray });
 };
-
-// export const loader: LoaderFunction = async ({ request, params }) => {
-//   invariant(params.nodeId, "noteId not found");
-//   const weatherDataArray = new Array<WeatherData>();
-
-//   await gun
-//     .get("weatherNodes")
-//     .get(params.nodeId)
-//     .map()
-//     .on((data) => {
-//       if (data) {
-//         const weatherData = {} as WeatherData;
-//         weatherData.temperature =
-//           data.temperature === 0 || data.temperature ? data.temperature : null;
-//         weatherData.windSpeed =
-//           data.windSpeed === 0 || data.windSpeed ? data.windSpeed : null;
-//         weatherData.updatedAt =
-//           data.updatedAt === 0 || data.updatedAt ? data.updatedAt : null;
-//         weatherDataArray.push(weatherData);
-//       }
-//     });
-//   // sort weatherDataArray by updatedAt which is a millisecond timestamp
-//   weatherDataArray.sort((a, b) => {
-//     return b.updatedAt - a.updatedAt;
-//   });
-//   return json<LoaderData>({ weatherDataArray });
-// };
 
 export const action: ActionFunction = async ({ request, params }) => {
   const userId = await requireUserId(request);

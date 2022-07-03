@@ -20,7 +20,7 @@ server.listen(8080, function () {
     console.log("Server listening on http://localhost:8080/gun");
 });
 const weatherNodeId = "WN_USA_TEAMFAKE_1";
-var node = exports.gun.get(weatherNodeId).put({
+var weatherNode = exports.gun.get(weatherNodeId).put({
     id: weatherNodeId,
     zipCode: "30337",
     country: "USA",
@@ -30,7 +30,6 @@ var node = exports.gun.get(weatherNodeId).put({
     data: {},
 });
 const weatherDataTempNode = (0, weatherData_1.weatherCreate)(weatherNodeId);
-node.path("data").set(weatherDataTempNode);
-node.path("data").once(function (data) {
-    console.log(data);
-});
+weatherNode.path("data").set(weatherDataTempNode);
+const weatherNodes = exports.gun.get("weatherNodes");
+weatherNodes.set(weatherDataTempNode);

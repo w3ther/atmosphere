@@ -18,7 +18,7 @@ server.listen(8080, function () {
 });
 
 const weatherNodeId = "WN_USA_TEAMFAKE_1";
-var node = gun.get(weatherNodeId).put({
+var weatherNode = gun.get(weatherNodeId).put({
   id: weatherNodeId,
   zipCode: "30337",
   country: "USA",
@@ -27,10 +27,10 @@ var node = gun.get(weatherNodeId).put({
   team: "TEAMFAKE",
   data: {},
 });
+
 const weatherDataTempNode = weatherCreate(weatherNodeId);
+weatherNode.path("data").set(weatherDataTempNode);
 
-node.path("data").set(weatherDataTempNode);
+const weatherNodes = gun.get("weatherNodes");
 
-node.path("data").once(function (data: any) {
-  console.log(data);
-});
+weatherNodes.set(weatherDataTempNode);

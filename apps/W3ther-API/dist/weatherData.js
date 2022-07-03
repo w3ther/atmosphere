@@ -9,6 +9,7 @@ const weatherCreate = (weatherNodeID) => {
         humidity: Math.floor(Math.random() * (100 - 0 + 1)) + 0,
         windSpeed: Math.floor(Math.random() * (100 - 0 + 1)) + 0,
         windDirection: Math.floor(Math.random() * (360 - 0 + 1)) + 0,
+        updatedAt: new Date().getTime(),
     };
     const weatherDataString = `${new Date().getTime()}-${weatherNodeID}`;
     return server_1.gun.get(weatherDataString).put(weatherData);
