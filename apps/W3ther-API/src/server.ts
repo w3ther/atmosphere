@@ -18,6 +18,7 @@ server.listen(8080, function () {
 });
 
 const weatherNodeId = "WN_USA_TEAMFAKE_1";
+
 var weatherNode = gun.get(weatherNodeId).put({
   id: weatherNodeId,
   zipCode: "30337",

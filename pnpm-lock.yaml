@@ -141,16 +141,17 @@ importers:
     specifiers:
       '@prisma/client': ^3.10.0
       '@types/bcryptjs': ^2.4.2
-      '@types/node': ^17.0.41
+      '@types/node': ^17.0.45
       bcryptjs: ^2.4.3
       config: '*'
       eslint: ^8.12.0
       esno: ^0.14.1
       prisma: ^3.10.0
       rimraf: ^3.0.2
+      ts-node: ^10.8.1
       tsconfig: '*'
       tsup: ^5.11.13
-      typescript: ^4.5.5
+      typescript: ^4.7.4
     dependencies:
       '@prisma/client': 3.15.2_prisma@3.15.2
       '@types/bcryptjs': 2.4.2
@@ -162,8 +163,9 @@ importers:
       esno: 0.14.1
       prisma: 3.15.2
       rimraf: 3.0.2
+      ts-node: 10.8.2_x2utdhayajzrh747hktprshhby
       tsconfig: 7.0.0
-      tsup: 5.12.9_typescript@4.7.4
+      tsup: 5.12.9_bn3y5sn7aa6hsplivwol7ie4em
       typescript: 4.7.4
 
   packages/eslint-config-custom:
@@ -8380,22 +8382,6 @@ packages:
       postcss: 8.4.14
     dev: true
 
-  /postcss-load-config/3.1.4:
-    resolution: {integrity: sha512-6DiM4E7v4coTE4uzA8U//WhtPwyhiim3eyjEMFCnUpzbrkK9wJHgKDT2mR+HbtSrd/NubVaYTOpSpjUl8NQeRg==}
-    engines: {node: '>= 10'}
-    peerDependencies:
-      postcss: '>=8.0.9'
-      ts-node: '>=9.0.0'
-    peerDependenciesMeta:
-      postcss:
-        optional: true
-      ts-node:
-        optional: true
-    dependencies:
-      lilconfig: 2.0.5
-      yaml: 1.10.2
-    dev: true
-
   /postcss-load-config/3.1.4_i7duc3lt6p42geuj2nwruihc6u:
     resolution: {integrity: sha512-6DiM4E7v4coTE4uzA8U//WhtPwyhiim3eyjEMFCnUpzbrkK9wJHgKDT2mR+HbtSrd/NubVaYTOpSpjUl8NQeRg==}
     engines: {node: '>= 10'}
@@ -8410,6 +8396,23 @@ packages:
     dependencies:
       lilconfig: 2.0.5
       postcss: 8.4.14
+      ts-node: 10.8.2_x2utdhayajzrh747hktprshhby
+      yaml: 1.10.2
+    dev: true
+
+  /postcss-load-config/3.1.4_ts-node@10.8.2:
+    resolution: {integrity: sha512-6DiM4E7v4coTE4uzA8U//WhtPwyhiim3eyjEMFCnUpzbrkK9wJHgKDT2mR+HbtSrd/NubVaYTOpSpjUl8NQeRg==}
+    engines: {node: '>= 10'}
+    peerDependencies:
+      postcss: '>=8.0.9'
+      ts-node: '>=9.0.0'
+    peerDependenciesMeta:
+      postcss:
+        optional: true
+      ts-node:
+        optional: true
+    dependencies:
+      lilconfig: 2.0.5
       ts-node: 10.8.2_x2utdhayajzrh747hktprshhby
       yaml: 1.10.2
     dev: true
@@ -10002,7 +10005,7 @@ packages:
   /tslib/2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
 
-  /tsup/5.12.9_typescript@4.7.4:
+  /tsup/5.12.9_bn3y5sn7aa6hsplivwol7ie4em:
     resolution: {integrity: sha512-dUpuouWZYe40lLufo64qEhDpIDsWhRbr2expv5dHEMjwqeKJS2aXA/FPqs1dxO4T6mBojo7rvo3jP9NNzaKyDg==}
     hasBin: true
     peerDependencies:
@@ -10025,7 +10028,7 @@ packages:
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
-      postcss-load-config: 3.1.4
+      postcss-load-config: 3.1.4_ts-node@10.8.2
       resolve-from: 5.0.0
       rollup: 2.75.7
       source-map: 0.8.0-beta.0

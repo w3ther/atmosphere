@@ -1,8 +1,6 @@
-import type { User, Note } from "@prisma/client";
-
 import { prisma } from "~/db.server";
-
-export type { Note } from "@prisma/client";
+import * as db from "database";
+import { Note, User } from "database";
 
 export function getNote({
   id,

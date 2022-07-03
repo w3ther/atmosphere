@@ -1,10 +1,11 @@
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://postgres:postgres@localhost:5432/postgres"
 }
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../../build/"
 }
 
 model User {

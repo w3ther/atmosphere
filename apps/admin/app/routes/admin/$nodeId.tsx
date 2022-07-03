@@ -5,8 +5,12 @@ import invariant from "tiny-invariant";
 import { deleteNote } from "~/models/note.server";
 import { requireUserId } from "~/session.server";
 import { gun } from "utils";
-import { WeatherData } from "database";
-
+export type WeatherData = {
+  temperature: number;
+  windSpeed: number;
+  longLat: [number, number];
+  updatedAt: number;
+};
 type LoaderData = {
   weatherDataArray: Array<WeatherData>;
 };
