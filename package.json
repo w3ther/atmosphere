@@ -10,7 +10,8 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "setup": "turbo run setup"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
@@ -24,5 +25,8 @@
   "dependencies": {
     "gun": "^0.2020.1237"
   },
-  "packageManager": "pnpm@7.0.0"
+  "packageManager": "pnpm@7.0.0",
+  "prisma": {
+    "seed": "node --require tsconfig-paths/register prisma/seed.js"
+  }
 }
