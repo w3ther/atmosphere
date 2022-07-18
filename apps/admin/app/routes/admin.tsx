@@ -1,9 +1,17 @@
 import { Form, Link, NavLink, Outlet } from "@remix-run/react";
-
+import stylesHref from "leaflet/dist/leaflet.css";
 import { useUser } from "~/utils";
 
 import { useState } from "react";
-
+import { LinksFunction } from "@remix-run/node";
+export const links: LinksFunction = () => {
+  return [
+    // add a local stylesheet, remix will fingerprint the file name for
+    // production caching
+    { rel: "stylesheet", href: stylesHref },
+    { page: "/users/123" },
+  ];
+};
 export default function NotesPage() {
   const navLinks = [
     {

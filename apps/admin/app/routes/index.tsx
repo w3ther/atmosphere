@@ -1,9 +1,18 @@
 import { Link } from "@remix-run/react";
-
+import stylesHref from "leaflet/dist/leaflet.css";
 import { useOptionalUser } from "~/utils";
-
+import type { LinksFunction } from "@remix-run/node";
+export const links: LinksFunction = () => {
+  return [
+    // add a local stylesheet, remix will fingerprint the file name for
+    // production caching
+    { rel: "stylesheet", href: stylesHref },
+    { page: "/users/123" },
+  ];
+};
 export default function Index() {
   const user = useOptionalUser();
+
   return (
     <main className="relative min-h-screen bg-white sm:flex sm:items-center sm:justify-center">
       <div className="lg:relative shadow-xl sm:overflow-hidden sm:rounded-2xl  lg:min-h-max">
