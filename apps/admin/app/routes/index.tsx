@@ -2,19 +2,12 @@ import { Link } from "@remix-run/react";
 import stylesHref from "leaflet/dist/leaflet.css";
 import { useOptionalUser } from "~/utils";
 import type { LinksFunction } from "@remix-run/node";
-export const links: LinksFunction = () => {
-  return [
-    // add a local stylesheet, remix will fingerprint the file name for
-    // production caching
-    { rel: "stylesheet", href: stylesHref },
-    { page: "/users/123" },
-  ];
-};
+
 export default function Index() {
   const user = useOptionalUser();
 
   return (
-    <main className="relative min-h-screen bg-white sm:flex sm:items-center sm:justify-center">
+    <main className="relative min-h-screen bg-white flex flex-col items-center justify-center">
       <div className="lg:relative shadow-xl sm:overflow-hidden sm:rounded-2xl  lg:min-h-max">
         <div className="absolute inset-0">
           <img
@@ -24,7 +17,7 @@ export default function Index() {
           />
           <div className="absolute inset-0 bg-[color:rgba(121,121,121,0.5)] mix-blend-multiply" />
         </div>
-        <div className="lg:pb-18 relative lg:px-4 pt-16 pb-8 sm:px-6 sm:pt-24 sm:pb-14 lg:px-8 lg:pt-32">
+        <div className="lg:pb-18 relative pt-16 pb-8 sm:px-6 sm:pt-24 sm:pb-14 lg:px-8 lg:pt-32">
           <h1 className="text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl lg:px-40">
             <span className="block uppercase text-white drop-shadow-md ">
               W3ther

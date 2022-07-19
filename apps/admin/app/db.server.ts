@@ -41,7 +41,6 @@ function getClient() {
   }
 
   console.log(`🔌 setting up prisma client to ${databaseUrl.host}`);
-  console.log("pathname", databaseUrl);
   // NOTE: during development if you change anything in this function, remember
   // that this only runs once per server restart and won't automatically be
   // re-run per request like everything else is. So if you need to change

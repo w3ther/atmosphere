@@ -43,7 +43,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="h-full">
+      <body className="container mx-auto">
         <Outlet />
         <ScrollRestoration />
         <Scripts />

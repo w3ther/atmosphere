@@ -23,7 +23,8 @@
     "node": ">=14.0.0"
   },
   "dependencies": {
-    "gun": "^0.2020.1237"
+    "gun": "^0.2020.1237",
+    "w-shared-ui": "*"
   },
   "packageManager": "pnpm@7.0.0",
   "prisma": {

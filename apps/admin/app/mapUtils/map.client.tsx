@@ -1,8 +1,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
 export default function CreateMap() {
   return (
-    <div className="max-w-6xl max-h-screen overflow-hidden">
+    <div className="rounded-lg max-h-screen overflow-hidden">
       <MapContainer
         center={[33.749, -84.388]}
         zoom={12}
