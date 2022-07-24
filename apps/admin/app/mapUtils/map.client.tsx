@@ -1,12 +1,12 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 export default function CreateMap() {
   return (
-    <div className="rounded-lg max-h-screen overflow-hidden">
+    <div className="rounded-lg  overflow-hidden">
       <MapContainer
         center={[33.749, -84.388]}
         zoom={12}
         scrollWheelZoom={false}
-        style={{ height: "100vh" }}
+        style={{ height: "500px", width: "500px" }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -18,7 +18,6 @@ export default function CreateMap() {
           </Popup>
         </Marker> */}
       </MapContainer>
-      ,
     </div>
   );
 }

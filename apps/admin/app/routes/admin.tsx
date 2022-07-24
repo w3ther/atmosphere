@@ -9,7 +9,6 @@ export const links: LinksFunction = () => {
     // add a local stylesheet, remix will fingerprint the file name for
     // production caching
     { rel: "stylesheet", href: stylesHref },
-    { page: "/users/123" },
   ];
 };
 export default function NotesPage() {
@@ -145,7 +144,7 @@ export default function NotesPage() {
           </ol>
         </div>
 
-        <div className="flex-1 ">
+        <div className="flex-1 overflow-auto">
           <Outlet />
         </div>
       </main>

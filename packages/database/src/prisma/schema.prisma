@@ -15,8 +15,10 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  password Password?
-  notes    Note[]
+  password    Password?
+  notes       Note[]
+  weatherNode weatherNode[]
+  collection  collection[]
 }
 
 model Password {
@@ -27,12 +29,44 @@ model Password {
 }
 
 model Note {
-  id    String @id @default(cuid())
-  title String
-  body  String
+  id   String @id @default(cuid())
+  name String
+  body String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String
+}
+
+model weatherNode {
+  id        String   @id @default(cuid())
+  city      String
+  country   String
+  type      String
+  lat       Float
+  lon       Float
+  timezone  String
+  owner     String
+  name      String
+  isActive  Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId       String
+  collection   collection? @relation(fields: [collectionId], references: [id])
+  collectionId String?
+}
+
+model collection {
+  id          String        @id @default(cuid())
+  name        String
+  isActive    Boolean
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  weatherNode weatherNode[]
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String

@@ -1,3 +1,5 @@
+import { weatherNode } from "database";
+import { prisma } from "~/db.server";
 import { gun } from "utils";
 
 export function getAllWeatherNodes() {
@@ -6,4 +8,10 @@ export function getAllWeatherNodes() {
     console.log("this weather node is", weatherNodes);
   });
   return weatherNodes;
+}
+
+export function getNodeInfoDatabase({ id }: Pick<weatherNode, "id">) {
+  return prisma.weatherNode.findFirst({
+    where: { id },
+  });
 }

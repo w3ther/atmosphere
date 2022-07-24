@@ -1,37 +1,21 @@
 // `http` is a standard library
 // built into node.
-import http from "http";
-import { weatherCreate } from "./weatherData";
+import Fastify from "fastify";
+const fastify = Fastify({
+  logger: true,
+});
 
-// Create a new server instance.
-var server = http.createServer();
+// Declare a route
+fastify.get("/", function (request, reply) {
+  reply.send({ hello: "world" });
+});
 
+// Run the server!
+fastify.listen({ port: 8080 }, function (err, address) {
+  if (err) {
+    fastify.log.error(err);
+    process.exit(1);
+  }
+  // Server is now listening on ${address}
+});
 // Our GUN setup from the last example.
-var Gun = require("gun");
-var path = require("gun/lib/path");
-Gun.path = path;
-export var gun = Gun({ web: server });
-
-// Start the server on port 8080.
-server.listen(8080, function () {
-  console.log("Server listening on http://localhost:8080/gun");
-});
-
-const weatherNodeId = "WN_USA_TEAMFAKE_1";
-
-var weatherNode = gun.get(weatherNodeId).put({
-  id: weatherNodeId,
-  zipCode: "30337",
-  country: "USA",
-  city: "Atlanta",
-  state: "GA",
-  team: "TEAMFAKE",
-  data: {},
-});
-
-const weatherDataTempNode = weatherCreate(weatherNodeId);
-weatherNode.path("data").set(weatherDataTempNode);
-
-const weatherNodes = gun.get("weatherNodes");
-
-weatherNodes.set(weatherDataTempNode);

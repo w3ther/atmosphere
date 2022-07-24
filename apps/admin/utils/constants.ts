@@ -10,8 +10,7 @@ export const THIS_ADMIN_URL =
 export const PI_PEERS =
   process.env.PI_PEERS || `http://localhost:${piPort_DEV}/gun`; // listen to all pi peers
 
-export const ADMIN_PEERS =
-  process.env.ADMIN_PEERS || ``; // only listen to other admin peers, not this peer
+export const ADMIN_PEERS = process.env.ADMIN_PEERS || ``; // only listen to other admin peers, not this peer
 
 export const adminPeersArray = ADMIN_PEERS.split(";");
 export const piPeersArray = ADMIN_PEERS.split(";");
