@@ -4,28 +4,25 @@ import { weatherNode } from "database";
 import { getNodeInfoDatabase } from "~/models/nodes.server";
 
 type LoaderData = {
-  nodes: weatherNode | null;
+  node: weatherNode | null;
 };
 export const loader: LoaderFunction = async ({ request, params }) => {
-  // const nodes = await getNodeInfoDatabase({ id: params.nodeId ?? "" });
-  const tempData = {
-    name: "Apollo 1",
-    timezone: "EST",
-    city: "Atlanta",
-    country: "USA",
-    createdAt: new Date("03/05/2022"),
-    id: "1",
-    lat: 33.749,
-    lon: 84.388,
-    owner: "W3ther",
-    type: "Main Node",
-    userId: "1",
-    updatedAt: new Date("03/05/2022"),
-  } as weatherNode;
-  return json<LoaderData>({ nodes: tempData });
+  const node = await getNodeInfoDatabase({ id: params.nodeId || "" });
+
+  return json<LoaderData>({ node });
 };
 
 export default function nodesId() {
   const data = useLoaderData<LoaderData>();
-  return <div className="text-black">{data.nodes!.name}</div>;
+  if (data.node) {
+    return (
+      <div>
+        <div className="text-white">{data.node.name}</div>
+        <div className="text-white">{data.node.country}</div>
+        <div className="text-white">{data.node.city}</div>
+        <div className="text-white">{data.node.lon}</div>
+        <div className="text-white">{data.node.lat}</div>
+      </div>
+    );
+  }
 }

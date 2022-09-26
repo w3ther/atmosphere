@@ -1,19 +1,24 @@
 import { json, LoaderFunction } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
+import { weatherNode } from "database";
 import { prisma } from "~/db.server";
-export const loader: LoaderFunction = async ({ request, params }) => {
-  // const nodes = await getNodeInfoDatabase({ id: params.nodeId ?? "" });
-  const nodes = prisma.weatherNode;
-  const t = await nodes.count();
-  console.log(t);
+import { getUser } from "~/session.server";
 
-  return json({});
+export const loader: LoaderFunction = async ({ request, params }) => {
+  const user = await getUser(request);
+  const nodes = await prisma.weatherNode.findMany({
+    where: {
+      userId: user?.id,
+    },
+  });
+
+  return json({ nodes });
 };
 export default function NotesPage() {
   const data = useLoaderData();
   return (
     <div>
-      <main>
+      <main className="">
         <div className="flex flex-row justify-start items-center w-full h-24 border">
           <div className="text-black  text-5xl h-full px-10 pt-7 ">
             <Link to={"/admin/nodes"}>Nodes</Link>
@@ -50,8 +55,24 @@ export default function NotesPage() {
             </div>
           </Link>
         </div>
-        <div className=" flex-1 ">
-          <Outlet />
+        <div className="flex bg-gray-900 h-screen">
+          <div className="w-48 text-sm font-medium   bg-gray-700  text-white">
+            {data.nodes.map((node: weatherNode) => {
+              return (
+                <Link
+                  key={node.id}
+                  to={`/admin/nodes/${node.id}`}
+                  aria-current="true"
+                  className="block py-2 px-4 w-full text-white  rounded-t-lg border-b border-gray-200 cursor-pointer hover:bg-gray-600 "
+                >
+                  {node.name}
+                </Link>
+              );
+            })}
+          </div>
+          <div className=" flex-1 ">
+            <Outlet />
+          </div>
         </div>
       </main>
     </div>

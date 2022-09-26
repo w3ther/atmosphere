@@ -15,7 +15,7 @@
     "db:migrate:deploy": "prisma migrate deploy",
     "db:migrate:dev": "prisma migrate dev --schema=./src/prisma/schema.prisma",
     "db:push": "prisma db push  --schema=./src/prisma/schema.prisma",
-    "db:seed": "esno src/seed.ts",
+    "db:seed": "esno src/prisma/seed.ts",
     "dev": "tsup --watch",
     "setup": "prisma generate --schema=./src/prisma/schema.prisma && prisma migrate deploy --schema=./src/prisma/schema.prisma  && prisma db seed ",
     "format": "prisma format",

@@ -7,7 +7,7 @@ export default function Index() {
   const user = useOptionalUser();
 
   return (
-    <main className="relative min-h-screen bg-white flex flex-col items-center justify-center">
+    <main className="relative minh-screen bg-white flex flex-col items-center justify-center">
       <div className="lg:relative shadow-xl sm:overflow-hidden sm:rounded-2xl  lg:min-h-max">
         <div className="absolute inset-0">
           <img

@@ -42,7 +42,7 @@ export default function NotesPage() {
   const user = useUser();
   const [isNavOpen, setIsNavOpen] = useState(false);
   return (
-    <div className="flex h-full min-h-screen flex-col">
+    <div className="flex h-full  flex-col">
       <header className="flex items-center justify-between bg-slate-800 p-4 text-white ">
         <h1 className="text-3xl font-bold hidden md:inline">
           <Link to="/">Admin Demo</Link>

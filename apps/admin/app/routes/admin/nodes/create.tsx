@@ -1,19 +1,23 @@
-import { ActionFunction } from "@remix-run/node";
+import { ActionFunction, redirect } from "@remix-run/node";
+import { Form, useActionData } from "@remix-run/react";
 import { prisma } from "~/db.server";
-export const action: ActionFunction = async ({ request }) => {
-  await new Promise((res) => setTimeout(res, 1000));
-  const formData = await request.formData();
-  const name = formData.get("name") ?? "";
+import { requireUserId } from "~/session.server";
+export const action: ActionFunction = async ({ request, context, params }) => {
+  const data = Object.fromEntries(await request.formData());
+  const name = data.name;
+
+  console.log(data);
+  const userId = await requireUserId(request);
+  console.log("userId", userId);
+
   const weatherNodesPrisma = prisma.weatherNode;
-  console.log("name", name);
   const weatherNodeCreated = await weatherNodesPrisma.create({
     data: {
       name: name.toString(),
-      userId: "1",
+      userId,
       owner: "W3ther",
       city: "College Park",
       country: "USA",
-      collectionId: "1",
       lat: 33.753746,
       lon: -84.38633,
       timezone: "EST",
@@ -21,28 +25,24 @@ export const action: ActionFunction = async ({ request }) => {
       type: "eagle",
     },
   });
-  console.log("weatherNodeCreated", weatherNodeCreated);
-  return weatherNodeCreated;
+  return redirect(`/admin/nodes/${weatherNodeCreated.id}`);
 };
 
 export default function Create() {
+  const returnData = useActionData();
   return (
-    <div className="bg-gray-900 max-w-2xl h-screen rounded-2xl m-1 px-6 py-4 ">
-      <form>
-        <div className="mb-6 ">
-          <label
-            htmlFor="name"
-            className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300"
-          >
-            Name
-          </label>
+    <div className=" max-w-2xl h-screen   px-6 py-4 ">
+      <Form id="createNodeForm" method="post">
+        <label className="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-300">
+          Name
           <input
-            id="name"
-            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+            name="name"
+            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm my-2 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             placeholder="angry_giraffe_279"
             required
           />
-        </div>
+        </label>
+
         <div className="mb-6">
           <label
             htmlFor="collection"
@@ -115,7 +115,7 @@ export default function Create() {
         >
           Register new account
         </button>
-      </form>
+      </Form>
     </div>
   );
 }
